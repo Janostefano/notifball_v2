@@ -1,0 +1,5 @@
+database:
+  username: postgres
+  password: postgres
+  url: jdbc:tc:postgresql:10:///localhost:5432/postgres?currentSchema=public
+  driver: org.testcontainers.jdbc.ContainerDatabaseDriver

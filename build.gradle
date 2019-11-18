@@ -1,24 +1,43 @@
-plugins {
-	id 'org.springframework.boot' version '2.2.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
+buildscript {
+	ext {
+		versions = [
+				springBoot      : '2.2.1.RELEASE',
+				spock           : '1.3-RC1-groovy-2.5',
+				testContainers  : '1.11.2'
+		]
+	}
 }
 
-group = 'com.notifball'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+plugins {
+	id 'java'
+	id 'groovy'
+	id 'application'
+	id 'maven-publish'
+}
+
+sourceCompatibility = '12'
 
 repositories {
 	mavenCentral()
 }
+mainClassName = 'com.notifball.notifball.AppRunner'
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	compile "org.springframework.boot:spring-boot-starter-web:$versions.springBoot"
+	compile "org.springframework.boot:spring-boot-starter-data-jdbc:$versions.springBoot"
+	compile "org.postgresql:postgresql:42.2.5"
+	compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
+
+	testCompile "org.springframework.boot:spring-boot-starter-test:$versions.springBoot"
+
+	testCompile "org.spockframework:spock-core:$versions.spock"
+	testCompile "org.testcontainers:postgresql:$versions.testContainers"
+	testCompile "org.testcontainers:testcontainers:$versions.testContainers"
+	testCompile "org.testcontainers:spock:$versions.testContainers"
+
+	testCompile "org.spockframework:spock-spring:$versions.spock"
+
+
+
 }
 
-test {
-	useJUnitPlatform()
-}
