@@ -1,0 +1,9 @@
+database:
+  username: postgres
+  password: postgres
+  url: jdbc:postgresql://localhost:5433/postgres?currentSchema=public
+  driver: org.postgresql.Driver
+
+spring:
+  datasource:
+    initialization-mode: always
