@@ -6,10 +6,10 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 @SpringBootApplication
 @EnableJdbcRepositories
-public class AppRunner {
+public class NotifballApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppRunner.class, args);
+		SpringApplication.run(NotifballApplication.class, args);
 	}
 
 }

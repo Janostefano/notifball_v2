@@ -4,7 +4,5 @@ postgres:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=postgres
     - POSTGRES_DB=postgres
-  #  volumes:
-  #    - './src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql'
   ports:
     - "5433:5432"

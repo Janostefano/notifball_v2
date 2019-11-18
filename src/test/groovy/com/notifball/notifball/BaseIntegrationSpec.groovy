@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 @ActiveProfiles("integration")
 @SpringBootTest(
-        classes = AppRunner,
+        classes = NotifballApplication,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class BaseIntegrationSpec extends Specification {
 
