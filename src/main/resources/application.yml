@@ -7,3 +7,5 @@ database:
 spring:
   datasource:
     initialization-mode: always
+
+footballDataToken: ENC(go3QTKBTDr/y5hMBUxpgrsYOitF0o2t3LZvpRGkx8a82xdbsG7JGqjRyJ5VwHahA)

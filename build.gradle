@@ -26,7 +26,9 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-starter-web:$versions.springBoot"
 	compile "org.springframework.boot:spring-boot-starter-data-jdbc:$versions.springBoot"
 	compile "org.postgresql:postgresql:42.2.5"
-	compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
+	compile "org.apache.commons:commons-dbcp2:2.6.0"
+	compile "com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.2"
+
 
 	testCompile "org.springframework.boot:spring-boot-starter-test:$versions.springBoot"
 
