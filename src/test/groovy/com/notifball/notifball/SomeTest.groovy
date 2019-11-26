@@ -1,23 +1,30 @@
 package com.notifball.notifball
 
-import com.notifball.notifball.infrastructure.KvRepository
-import com.notifball.notifball.infrastructure.PersistentKv
+import com.notifball.notifball.api.TeamsDto
+import com.notifball.notifball.infrastructure.team.TeamRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+
+
+import static org.springframework.http.HttpMethod.GET
 
 class SomeTest extends BaseIntegrationSpec {
 
-    @Autowired
-    KvRepository kvRepository
-
-    def "should get data from db"() {
+    def "should get teams data from provider and save those in repository"() {
         given:
-        def kv1 = new PersistentKv("some_key", "some_value")
-        def kv2 = new PersistentKv("some_key", "some_value")
-        kvRepository.save(kv1)
-        kvRepository.save(kv2)
+        HttpHeaders headers = new HttpHeaders()
+        headers.set("X-Auth-Token", footballDataToken)
+        HttpEntity entity = new HttpEntity<>(headers)
+
         when:
-        def result = kvRepository.findAll()
+        def response = restTemplate.exchange("http://api.football-data.org/v2/competitions/2021/teams", GET, entity, TeamsDto.class)
+        def teams = teamMapper.toPersistent(teamMapper.toDomain(response.body))
+        teamRepository.saveAll(teams)
+
         then:
-        result.size() == 2
+        teamRepository.findAll().size() == 20
     }
 }
